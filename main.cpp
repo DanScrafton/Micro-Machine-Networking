@@ -44,6 +44,10 @@ int main()
     // Initialise
     srand(time(NULL));
     RenderWindow app(VideoMode(640, 480), "Car Racing Game!");
+
+    RectangleShape checkpoint1(Vector2f(400, 20));
+    checkpoint1.setFillColor(sf::Color::Green);
+
     app.setFramerateLimit(60);
     Texture t1,t2;
     t1.loadFromFile("images/background.png");
@@ -90,7 +94,7 @@ int main()
         if (Keyboard::isKeyPressed(Keyboard::Down))  Down=1;
         if (Keyboard::isKeyPressed(Keyboard::Left))  Left=1;
         // alternative
-        bool Up=0,Right=0,Down=0,Left=0;
+//  bool Up=0,Right=0,Down=0,Left=0;
         if(Keyboard::isKeyPressed(Keyboard::W)) Up=1;
         if(Keyboard::isKeyPressed(Keyboard::D)) Right=1;
         if(Keyboard::isKeyPressed(Keyboard::S)) Down=1;
@@ -151,15 +155,26 @@ int main()
 
         // clipping and blitting to look at
         // if centre off tweak this
-           if (Car[0].x > sBackground.getGlobalBounds().width)
-                Car[0].x = sBackground.getGlobalBounds().width;
-          // if
+
+        //   if (Car[0].x > sBackground.getGlobalBounds().width)
+           //    Car[0].x = sBackground.getGlobalBounds().width;
+          //if (Car[0].x < sBackground.getGlobalBounds().width)
+          //  Car[0].x = sBackground.getGlobalBounds().width;
+           // if (Car[0].y < sBackground.getGlobalBounds().height)
+             //   Car[0].y = sBackground.getGlobalBounds().height;
+               //  if (Car[0].y > sBackground.getGlobalBounds().height)
+               // Car[0].y = sBackground.getGlobalBounds().height;
         }
         // TODO: Don't show white at bottom/right.
         if (car[0].x>320) offsetX = car[0].x-320;
         if (car[0].y>240) offsetY = car[0].y-240;
         sBackground.setPosition(-offsetX,-offsetY);
+        checkpoint1.setPosition(400 - offsetX, 600 - offsetY);
+
+//        checkpoint1.getGlobalBounds().intersects()
+
         app.draw(sBackground);
+        app.draw(checkpoint1);
         for(int i=0;i<N;i++)
         {
             sCar.setPosition(car[i].x-offsetX,car[i].y-offsetY);
