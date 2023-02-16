@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +23,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -45,7 +47,9 @@
 			<Add directory="/usr/local/SFML-2.2/lib" />
 			<Add directory="./lib" />
 		</Linker>
+		<Unit filename="include/My_Class.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/My_Class.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
