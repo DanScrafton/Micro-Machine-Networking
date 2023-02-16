@@ -23,7 +23,6 @@ int main()
     std::thread t(Hello);
     t.join();
 
-
     std::vector<std::thread>threads;
     for(int i = 0; i<5; ++i)
     {
