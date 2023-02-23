@@ -5,49 +5,71 @@
 #include <iostream>
 #include <thread>
 #include <vector>
-#include "My_Class.h"
+//#include "My_Class.h"
 
 void Server()
 {
-sf::TcpListener listener;
-sf::Socket::Status status;
-status = listener.listen(4300);
+    sf::TcpListener listener;
+    sf::Socket::Status status;
+    status = listener.listen(4300);
 
-if(status != sf::Socket::Done)
+    if(status != sf::Socket::Done)
+    {
+    std::cout<< "Error Listening\n";
+    return;
+    }
+    sf::TcpSocket socket;
+    status = listener.accept(socket); // blocking
+
+    if(status != sf::Socket::Done)
+    {
+    std::cout<<"Error accepting\n";
+    return;
+    }
+
+    sf::Packet packet;
+    status = socket.receive(packet);
+
+    if(status != sf::Socket::Done)
+    {
+    std::cout<<"Error recieving\n";
+    return;
+    }
+
+    std::string message;
+    packet >> message;
+    std::cout<<message;
+    packet.clear();
+    packet << "servermsg";
+    status = socket.send(packet);
+    if(status != sf::Socket::Done)
+    {
+    std::cout<<"Error sending\n";
+    return;
+    }
+}
+
+void Client()
 {
-std::cout<< "Error Listening\n";
-return;
+    sf::TcpSocket socket;
+    socket.connect("localhost", 4300);
+    sf::Packet packet;
+    packet << "Hi\n";
+    socket.send(packet);
+    packet.clear();
+    socket.receive(packet);
+    std::string msg;
+    packet >> msg;
+    std::cout << msg;
 }
-sf::TcpSocket socket;
-status = lister.accept(socket); // blocking
-
-if(status != sf::Socket::Done)
-{
-std::cout<<"Error accepting\n"
-return;
-}
-
-status = socket.receive(packet);
-
-if(status != sf::Socket::Done)
-{
-std::cout<<"Error recieving\n";
-return;
-}
-
-std::string message;
-packet >> message;
-std::cout<<message;
-packet.clear();
-status = socket.send(packet);
-
-id(status !)
-}
-
 
 int main()
 {
     srand(time(NULL));
+    std::thread serverThread(&Server);
+    std::this_thread::sleep_for(std::chrono::microseconds(10));
+    Client();
+    serverThread.join();
 //    std::thrsrand(time(NULL));
 //    std::thread t(Hello);
 //    t.join();
