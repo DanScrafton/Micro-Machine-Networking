@@ -3,7 +3,6 @@
 #include <chrono>
 #include <cstring>
 #include <iostream>
-#include <iostream>
 #include <sstream>
 #include <thread>
 
@@ -22,13 +21,20 @@ void Receiver::recv_loop()
         ss << socket_->getRemoteAddress() << ":" << socket_->getRemotePort() << std::endl;
         std::cout << ss.str();
     }
+    sf::IpAddress sender = socket_->getRemoteAddress();
     while(1)
     {
         std::memset(buffer, 0, 256);
         std::size_t received;
+        sf::Socket::Status status;
         // TODO receive a message here
         //return status code
-        std::cout<<"Recieved"<<received<<"bytes from "<< sender << " on port" << PORT << std::endl;
+        status = socket_->receive(buffer, 256, received);
+        if (status != sf::Socket::Done)
+        {
+            // TODO: hanlde error
+        }
+        std::cout<<"Recieved"<<received<<"bytes from "<< sender << " on port" << TCP_PORT << std::endl;
         {
             std::stringstream ss;
             ss << "Received: \"" << buffer << "\", " << received << " bytes." << std::endl;

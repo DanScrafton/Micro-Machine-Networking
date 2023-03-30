@@ -45,6 +45,7 @@
 			<Add directory="/usr/local/SFML-2.2/lib" />
 			<Add directory="./lib" />
 		</Linker>
+		<Unit filename="Broadcasting_test.cpp" />
 		<Unit filename="Client.h" />
 		<Unit filename="Server.h" />
 		<Unit filename="accepter.cpp" />
@@ -52,6 +53,7 @@
 		<Unit filename="client.cpp" />
 		<Unit filename="list.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="map.hpp" />
 		<Unit filename="queue.h" />
 		<Unit filename="receiver.cpp" />
 		<Unit filename="receiver.h" />

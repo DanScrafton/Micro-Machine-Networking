@@ -1,0 +1,1 @@
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:".:/usr/local/SFML-2.2/lib:/home/scm-studs/b1046430/Desktop/Week 7/Micro-Machine-Networking-main/lib" /home/scm-studs/b1046430/Desktop/Week\ 7/Micro-Machine-Networking-main/bin/Debug/MM
